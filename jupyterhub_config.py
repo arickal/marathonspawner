@@ -16,5 +16,9 @@ c.MarathonSpawner.marathon_host = 'http://leader.mesos:8080'
 c.MarathonSpawner.ports = [8000]
 c.MarathonSpawner.mem_limit = '2G'
 c.MarathonSpawner.cpu_limit = 1
+c.MarathonSpawner.username = 'someone'
+c.MarathonSpawner.password = 'combination'
+c.MarathonSpawner.verify = False
+
 
 c.JupyterHub.authenticator_class = 'dummyauthenticator.DummyAuthenticator'
