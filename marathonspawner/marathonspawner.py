@@ -40,6 +40,18 @@ class MarathonSpawner(Spawner):
         u'',
         help="Hostname of Marathon server").tag(config=True)
 
+    username = Unicode(
+        u'',
+        help="Marathon username").tag(config=True)
+
+    password = Unicode(
+        u'',
+        help="Marathon user password").tag(config=True)
+
+    verify = Any(
+        False,
+        help="Marathon verify certificate, please refer to urllib3").tag(config=True)
+
     marathon_constraints = List(
         [],
         help='Constraints to be passed through to Marathon').tag(config=True)
@@ -132,7 +144,12 @@ class MarathonSpawner(Spawner):
 
     def __init__(self, *args, **kwargs):
         super(MarathonSpawner, self).__init__(*args, **kwargs)
-        self.marathon = MarathonClient(self.marathon_host)
+        self.marathon = MarathonClient(
+                            self.marathon_host,
+                            username=self.username,
+                            password=self.password,
+                            verify=self.verify
+                            )
 
     @property
     def container_name(self):
